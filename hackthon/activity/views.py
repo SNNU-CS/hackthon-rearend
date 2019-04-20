@@ -1,13 +1,13 @@
+import requests
+from user.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Activity, UserActivity
 from .Serializer import CreateActivitySerializer, GetActivitySerializer, GetUserActivitySerializer
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 from rest_framework.views import APIView
 import logging
 logger = logging.getLogger('django')
-from .models import Activity, UserActivity
-from django.core.exceptions import ObjectDoesNotExist
-from user.models import User
-import requests
 
 
 # Create your views here.
