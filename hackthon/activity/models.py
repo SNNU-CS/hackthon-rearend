@@ -17,4 +17,5 @@ class Activity(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     delete_time = models.DateTimeField(null=True, default=None)
-    number = models.IntegerField(default=0)
+    number = models.IntegerField()
+    number_now = models.IntegerField(default=0)
