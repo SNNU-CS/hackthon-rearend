@@ -7,17 +7,22 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('nick_name', models.CharField(max_length=30)),
                 ('avatar_url', models.CharField(max_length=100)),
-                ('gender', models.TextField(choices=[('M', '男'), ('F', '女'), ('U', '未知')])),
+                ('gender',
+                 models.TextField(choices=[('M', '男'), ('F', '女'), ('U',
+                                                                    '未知')])),
                 ('open_id', models.CharField(max_length=128)),
             ],
         ),
