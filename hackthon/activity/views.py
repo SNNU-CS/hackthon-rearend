@@ -2,7 +2,7 @@ import requests
 from user.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Activity, UserActivity
-from .Serializer import CreateActivitySerializer, GetActivitySerializer, GetUserActivitySerializer
+from .Serializer import CreateActivitySerializer, GetActivitySerializer, ActivitySerializer
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 from rest_framework.views import APIView
@@ -58,9 +58,13 @@ class UserActivityView(APIView):
     def get(self, request, id):
         try:
             open_id = code_convert(id)
+            # open_id = 'oBsDr4rGaO9V8UcJqBsyL571h4oU'
             user_id = User.objects.get(open_id=open_id).id
-            data = UserActivity.objects.filter(user_id=user_id)
-            serializer = GetUserActivitySerializer(data, many=True)
+            ls = []
+            for e in UserActivity.objects.filter(user_id=user_id):
+                ls.append(e.activity_id)
+            data = Activity.objects.filter(id__in=ls)
+            serializer = ActivitySerializer(data, many=True)
             return JsonResponse({
                 'status': 200,
                 'msg': '查询成功',
