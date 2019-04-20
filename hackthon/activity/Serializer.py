@@ -23,3 +23,8 @@ class GetActivitySerializer(serializers.Serializer):
     create_time = serializers.DateTimeField(required=True)
     update_time = serializers.DateTimeField(required=True)
     delete_time = serializers.DateTimeField(required=True)
+
+
+class GetUserActivitySerializer(serializers.Serializer):
+    activity_id = serializers.IntegerField(required=True)
+    user_class = serializers.CharField(required=True)
