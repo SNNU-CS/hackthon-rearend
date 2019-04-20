@@ -7,4 +7,4 @@ class User(models.Model):
     avatar_url = models.CharField(max_length=100)
     gender = models.CharField(choices=((u'M', u'男'), (u'F', u'女'), (u'U',
                                                                     u'未知')))
-    open_id = models.CharField(max_length=30)
+    open_id = models.CharField(max_length=128)
