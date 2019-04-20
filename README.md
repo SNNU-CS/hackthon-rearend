@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.com/snnucs/hackthon-rearend.svg?branch=master)](https://travis-ci.com/snnucs/hackthon-rearend)
 [![LICENSE](https://img.shields.io/github/license/snnucs/hackthon-rearend.svg)](https://github.com/snnucs/hackthon-rearend/blob/master/LICENSE)
 ![image](https://img.shields.io/pypi/pyversions/snnusdk.svg)
+
 2019.04.20 - 2019.04.21 西安电子科技大学-微软俱乐部-hackathon。 PPT 队，后端部分，微信小程序
 
 ## 项目结构
