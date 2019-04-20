@@ -27,6 +27,7 @@ class GetActivitySerializer(serializers.Serializer):
     delete_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S",
                                             required=True)
     number = serializers.IntegerField(required=True)
+    number_now = serializers.IntegerField(required=True)
 
 
 class GetUserActivitySerializer(serializers.Serializer):
