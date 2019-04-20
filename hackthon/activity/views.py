@@ -1,4 +1,4 @@
-from .Serializer import CreateActivitySerializer, GetActivitySerializer
+from .Serializer import CreateActivitySerializer, GetActivitySerializer, GetUserActivitySerializer
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
 from rest_framework.views import APIView
@@ -56,9 +56,9 @@ class ActivityListView(APIView):
 class UserActivityView(APIView):
     def get(self, request, id):
         try:
-            user = User.get(open_id=id)
-            data = Activity.objects.get(pk=id)
-            serializer = GetActivitySerializer(data, many=True)
+            user_id = User.objects.get(open_id=id).id
+            data = UserActivity.objects.filter(user_id=user_id)
+            serializer = GetUserActivitySerializer(data, many=True)
             return JsonResponse({
                 'status': 200,
                 'msg': '查询成功',
