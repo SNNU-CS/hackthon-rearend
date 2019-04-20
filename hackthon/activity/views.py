@@ -4,8 +4,9 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 import logging
 logger = logging.getLogger('django')
-from .models import Activity
+from .models import Activity, UserActivity
 from django.core.exceptions import ObjectDoesNotExist
+from user.models import User
 
 
 # Create your views here.
@@ -27,6 +28,37 @@ class ActivityView(APIView):
         try:
             data = Activity.objects.get(pk=pk)
             serializer = GetActivitySerializer(data, many=False)
+            return JsonResponse({
+                'status': 200,
+                'msg': '查询成功',
+                'data': serializer.data
+            })
+        except ObjectDoesNotExist:
+            return JsonResponse({'status': 200, 'msg': "不存在的id", 'data': None})
+        except Exception as e:
+            return JsonResponse({'status': 500, 'msg': str(e), 'data': None})
+
+
+class ActivityListView(APIView):
+    def get(self, request):
+        try:
+            data = Activity.objects.all()
+            serializer = GetActivitySerializer(data, many=True)
+            return JsonResponse({
+                'status': 200,
+                'msg': '查询成功',
+                'data': serializer.data
+            })
+        except Exception as e:
+            return JsonResponse({'status': 500, 'msg': str(e), 'data': None})
+
+
+class UserActivityView(APIView):
+    def get(self, request, id):
+        try:
+            user = User.get(open_id=id)
+            data = Activity.objects.get(pk=id)
+            serializer = GetActivitySerializer(data, many=True)
             return JsonResponse({
                 'status': 200,
                 'msg': '查询成功',
