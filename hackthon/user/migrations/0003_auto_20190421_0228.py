@@ -18,7 +18,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='gender',
-            field=models.TextField(choices=[('M', '男'), ('F', '女'), ('U', '未知')], default='M'),
+            field=models.TextField(choices=[('M', '男'), ('F', '女'),
+                                            ('U', '未知')],
+                                   default='M'),
         ),
         migrations.AlterField(
             model_name='user',

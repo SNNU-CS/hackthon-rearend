@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+from .models import User
+import requests
 from .Serializer import CreateUser
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
@@ -9,8 +11,6 @@ from rest_framework.views import APIView
 from django.core.exceptions import ObjectDoesNotExist
 import logging
 logger = logging.getLogger('django')
-from .models import User
-import requests
 
 
 # Create your views here.
