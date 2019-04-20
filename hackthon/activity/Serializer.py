@@ -7,7 +7,7 @@ class CreateActivitySerializer(serializers.Serializer):
     description = serializers.CharField(allow_blank=True)
     time = serializers.DateTimeField(required=True)
     location = serializers.CharField(required=True, allow_blank=True)
-    activity_type = serializers.CharField(required=True, allow_blank=False)
+    activity_type = serializers.CharField(required=False, allow_blank=False)
     number = serializers.IntegerField(required=True)
 
     def create(self, validated_data):
