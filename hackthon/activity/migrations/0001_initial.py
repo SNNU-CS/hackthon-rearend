@@ -7,14 +7,17 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Activity',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
                 ('time', models.DateTimeField()),
@@ -28,10 +31,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserActivity',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('user_id', models.IntegerField()),
                 ('activity_id', models.IntegerField()),
-                ('user_class', models.TextField(choices=[('S', '发起者'), ('A', '参与者')])),
+                ('user_class',
+                 models.TextField(choices=[('S', '发起者'), ('A', '参与者')])),
             ],
         ),
     ]
