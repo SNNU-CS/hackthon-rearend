@@ -7,6 +7,7 @@ logger = logging.getLogger('django')
 from .models import Activity, UserActivity
 from django.core.exceptions import ObjectDoesNotExist
 from user.models import User
+import requests
 
 
 # Create your views here.
@@ -56,7 +57,8 @@ class ActivityListView(APIView):
 class UserActivityView(APIView):
     def get(self, request, id):
         try:
-            user_id = User.objects.get(open_id=id).id
+            open_id = code_convert(id)
+            user_id = User.objects.get(open_id=open_id).id
             data = UserActivity.objects.filter(user_id=user_id)
             serializer = GetUserActivitySerializer(data, many=True)
             return JsonResponse({
@@ -71,8 +73,8 @@ class UserActivityView(APIView):
 
     def post(self, request, id):
         try:
-            user_id = User.objects.get(open_id=id).id
-
+            open_id = code_convert(id)
+            user_id = User.objects.get(open_id=open_id).id
             activity_id = request.data['activity_id']
             UserActivity.objects.create(activity_id=activity_id,
                                         user_id=user_id,
@@ -85,3 +87,14 @@ class UserActivityView(APIView):
             return JsonResponse({'status': 200, 'msg': "不存在的id"})
         except Exception as e:
             return JsonResponse({'status': 500, 'msg': str(e)})
+
+
+def code_convert(code):
+    js_code = code
+    appid = 'wx9f3b544a8b2be233'
+    secret = 'ce7674d0b0ad90e189c75fc1b14'
+    requestString = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx9f3b544a8b2be233&secret=5a7f3ce7674d0b0ad90e189c75fc1b14&js_code=' + js_code + '&grant_type=authorization_code'
+    r = requests.get(requestString)
+    r = r.json()
+    openid = r['openid']
+    return openid
