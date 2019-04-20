@@ -4,4 +4,4 @@ from django.db import models
 class UserActivity(models.Model):
     user_id = models.CharField(max_length=255)
     activity_id = models.CharField(max_length=255)
-    user_class = models.CharField(max_length=2,choices=((u'S',u'Sponsor'),(u'A',u'Actor')))
+    user_class = models.CharField(choices=((u'S',u'发起者'),(u'A',u'参与者')))
