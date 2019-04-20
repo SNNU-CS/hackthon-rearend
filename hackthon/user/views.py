@@ -19,21 +19,20 @@ class UserView(APIView):
 
         try:
             data = JSONParser().parse(request)
-            #print(data)
             code = data['code']
-            #print(code)
             openid = code_convert(code)
-            #print(data)
-            del data['code']
-            #print(data)
-            data['open_id'] = openid
-            #print(data)
-            serializer = CreateUser(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return JsonResponse({'status': 200, 'msg': '添加成功！'})
-            else:
-                return JsonResponse({'status': 403, 'msg': '载荷错误！'})
+            try:
+                User.objects.get(open_id=openid)
+            except ObjectDoesNotExist:
+                del data['code']
+                data['open_id'] = openid
+                serializer = CreateUser(data=data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return JsonResponse({'status': 200, 'msg': '添加成功！'})
+                else:
+                    return JsonResponse({'status': 403, 'msg': '载荷错误！'})
+            return JsonResponse({'status': 200, 'msg': '已存在用户！'})
         except Exception as e:
             return JsonResponse({'status': 500, 'msg': str(e)})
 
