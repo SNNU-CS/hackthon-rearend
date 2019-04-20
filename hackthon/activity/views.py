@@ -68,3 +68,20 @@ class UserActivityView(APIView):
             return JsonResponse({'status': 200, 'msg': "不存在的id", 'data': None})
         except Exception as e:
             return JsonResponse({'status': 500, 'msg': str(e), 'data': None})
+
+    def post(self, request, id):
+        try:
+            user_id = User.objects.get(open_id=id).id
+
+            activity_id = request.data['activity_id']
+            UserActivity.objects.create(activity_id=activity_id,
+                                        user_id=user_id,
+                                        user_class='A')
+            return JsonResponse({
+                'status': 200,
+                'msg': '添加成功',
+            })
+        except ObjectDoesNotExist:
+            return JsonResponse({'status': 200, 'msg': "不存在的id"})
+        except Exception as e:
+            return JsonResponse({'status': 500, 'msg': str(e)})
