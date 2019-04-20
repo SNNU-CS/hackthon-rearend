@@ -16,4 +16,4 @@ class Activity(models.Model):
     activity_type = models.CharField(max_length=255)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-    delete_time = models.DateTimeField(default=None)
+    delete_time = models.DateTimeField(null=True, default=None)
