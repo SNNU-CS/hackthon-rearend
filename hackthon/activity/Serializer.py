@@ -31,6 +31,7 @@ class GetActivitySerializer(serializers.Serializer):
     number_now = serializers.IntegerField(required=True)
 
 
-class GetUserActivitySerializer(serializers.Serializer):
-    activity_id = serializers.IntegerField(required=True)
-    user_class = serializers.CharField(required=True)
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Activity
+        fields = '__all__'
