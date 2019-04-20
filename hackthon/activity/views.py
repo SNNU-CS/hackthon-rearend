@@ -10,17 +10,18 @@ from .models import Activity
 
 # Create your views here.
 class ActivityView(APIView):
-    def post(self, request, format=None):
+    def post(self, request):
         try:
-            # data = JSONParser().parse(request)
-            # logger.info(data)
-            # serializer = CreateActivitySerializer(data=data)
-            # return JsonResponse(serializer.errors, status=200)
-            return JsonResponse({'xx': "大家觉得"})
+            data = JSONParser().parse(request)
+            serializer = CreateActivitySerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({'status': 200, 'msg': '添加成功!'})
+            else:
+                return JsonResponse({'status': 403, 'msg': '载荷错误!'})
         except Exception as e:
             logger.info(e)
-            # return JsonResponse(serializer.errors, status=500)
-            return JsonResponse({'xx': "456"})
+            return JsonResponse({'status': 500, 'msg': str(e)})
 
     def get(self, request):
         try:

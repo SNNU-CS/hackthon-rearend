@@ -9,6 +9,9 @@ class CreateActivitySerializer(serializers.Serializer):
     location = serializers.CharField(required=True, allow_blank=True)
     activity_type = serializers.CharField(required=True, allow_blank=False)
 
+    def create(self, validated_data):
+        return Activity.objects.create(**validated_data)
+
 
 class GetActivitySerializer(serializers.Serializer):
     title = serializers.CharField(required=True, allow_blank=False)
