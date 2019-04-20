@@ -77,6 +77,13 @@ class UserActivityView(APIView):
             # open_id = 'oBsDr4idTS54BBl9IQ0PoO3IfL5w'
             user_id = User.objects.get(open_id=open_id).id
             activity_id = request.data['activity_id']
+            check = UserActivity.objects.filter(activity_id=activity_id,
+                                                user_id=user_id).count()
+            if check > 0:
+                return JsonResponse({
+                    'status': 200,
+                    'msg': '该用户已参与此活动!',
+                })
             activity = Activity.objects.get(pk=activity_id)
             activity.number_now += 1
             activity.save()
