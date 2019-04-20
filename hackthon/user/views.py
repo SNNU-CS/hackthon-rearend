@@ -22,8 +22,7 @@ class UserView(APIView):
             #print(data)
             code = data['code']
             #print(code)
-            # openid = code_convert(code)
-            openid = '123'
+            openid = code_convert(code)
             #print(data)
             del data['code']
             #print(data)
