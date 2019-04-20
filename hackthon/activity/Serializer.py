@@ -14,8 +14,12 @@ class CreateActivitySerializer(serializers.Serializer):
 
 
 class GetActivitySerializer(serializers.Serializer):
+    id = serializers.IntegerField(required=True)
     title = serializers.CharField(required=True, allow_blank=False)
     description = serializers.CharField(allow_blank=True)
     time = serializers.DateTimeField(required=True)
     location = serializers.CharField(required=True, allow_blank=True)
     activity_type = serializers.CharField(required=True, allow_blank=False)
+    create_time = serializers.DateTimeField(required=True)
+    update_time = serializers.DateTimeField(required=True)
+    delete_time = serializers.DateTimeField(required=True)
