@@ -74,8 +74,12 @@ class UserActivityView(APIView):
     def post(self, request, id):
         try:
             open_id = code_convert(id)
+            # open_id = 'oBsDr4idTS54BBl9IQ0PoO3IfL5w'
             user_id = User.objects.get(open_id=open_id).id
             activity_id = request.data['activity_id']
+            activity = Activity.objects.get(pk=activity_id)
+            activity.number_now += 1
+            activity.save()
             UserActivity.objects.create(activity_id=activity_id,
                                         user_id=user_id,
                                         user_class='A')
