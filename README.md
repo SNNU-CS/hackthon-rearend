@@ -50,8 +50,8 @@
          __init__.py
 ```
 ## 开发流程
-* python环境:`python3.5+`
-* mySQL:`3.5以上`
+* Python环境:`python3.5+`
+* MySQL:`3.5以上`
 * Django:`2.0以上`
 
 ```bash
